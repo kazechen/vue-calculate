@@ -6,7 +6,7 @@ const props = defineProps({
 defineEmits(["toggle"]);
 </script>
 <template>
-  <div class="text-left mt-4 about mx-auto md:w-80 bg-white rounded-xl">
+  <div class="px-2 text-left bg-white rounded-xl">
     <h1
       class="flex items-center justify-between cursor-pointer px-1 py-3"
       @click="$emit('toggle')"

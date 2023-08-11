@@ -275,9 +275,7 @@ function backspace() {
       </div>
     </div>
 
-    <div
-      class="text-left mt-4 mx-2 px-2 about mx-auto px-2 md:w-80 bg-white rounded-xl"
-    >
+    <div class="text-left mt-4 px-2 about mx-auto sm:px-0 md:w-80">
       <TheAccordion
         title="功能說明"
         :isOpen="isOpenAccordion"
