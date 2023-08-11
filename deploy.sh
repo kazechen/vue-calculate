@@ -8,5 +8,5 @@ cd dist
 git init
 git add -A
 git commit -m 'deploy'
-git push -f https://github.com/kazechen/dev-calculate.git master:gh-pages
+git push -f https://github.com/kazechen/vue-calculate.git master:gh-pages
 cd -
