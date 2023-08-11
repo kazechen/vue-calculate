@@ -3,6 +3,7 @@ import { ref, reactive, onMounted } from "vue";
 import { floatAdd, floatSub, floatMul, floatDiv } from "@/utils/math.js";
 import CalButton from "@/components/CalButton.vue";
 import CalViewer from "@/components/CalViewer.vue";
+import TheAccordion from "@/components/TheAccordion.vue";
 
 const state = reactive({
   prev: "",
@@ -15,6 +16,9 @@ const state = reactive({
   pageLoaded: false,
 });
 const isOpenAccordion = ref(false);
+const toggleAccordion = () => {
+  isOpenAccordion.value = !isOpenAccordion.value;
+};
 
 onMounted(() => {
   state.pageLoaded = true;
@@ -174,7 +178,8 @@ function backspace() {
 </script>
 
 <template>
-  <div class="home absolute inset-y-1/4 w-full">
+  <!-- absolute -->
+  <div class="home inset-y-1/4 w-full">
     <div
       :class="[
         'drop-shadow-md transition delay-300 home mx-auto px-2 sm:px-0 md:w-80',
@@ -271,39 +276,13 @@ function backspace() {
     </div>
 
     <div
-      class="text-left mt-4 px-2 about mx-auto px-2 md:w-80 bg-white rounded-xl"
+      class="text-left mt-4 mx-2 px-2 about mx-auto px-2 md:w-80 bg-white rounded-xl"
     >
-      <h1
-        class="flex items-center justify-between cursor-pointer px-1 py-3"
-        @click="
-          () => {
-            isOpenAccordion = !isOpenAccordion;
-          }
-        "
+      <TheAccordion
+        title="功能說明"
+        :isOpen="isOpenAccordion"
+        @toggle="toggleAccordion"
       >
-        功能說明<svg
-          data-accordion-icon=""
-          :class="[
-            'w-3 h-3 shrink-0',
-            {
-              'rotate-180': isOpenAccordion,
-            },
-          ]"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 10 6"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 5 5 1 1 5"
-          ></path>
-        </svg>
-      </h1>
-      <div :class="['border-t py-3', { hidden: !isOpenAccordion }]">
         <ul class="list-decimal px-5 mb-4">
           <li>自適應頁面設計(RWD)</li>
           <li>可切換介面風格：明亮、黑暗</li>
@@ -318,7 +297,7 @@ function backspace() {
           <li>Vue CLI + vue3</li>
           <li>Tailwind CSS</li>
         </ul>
-      </div>
+      </TheAccordion>
     </div>
   </div>
 </template>
