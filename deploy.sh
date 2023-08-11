@@ -1,12 +1,30 @@
-#!/usr/bin/env sh
-# 當發生錯誤時終止腳本運行
+# 發生錯誤時執行終止指令
 set -e
-# 打包
+
+originUrl=$(git config --get remote.origin.url)
+
+nowStatus=${originUrl:0:5}
+echo $nowStatus
+if [ $nowStatus = 'https' ]
+then
+  echo 'MODE: HTTPs'
+  echo 'remote repository URL：'$originUrl
+else
+  echo 'MODE: SSH'
+  echo 'remote repository URL：'$originUrl
+fi
+
+# 打包編譯
 npm run build
-# 移動至到打包後的dist目錄 
+
+#移動到打包資料夾下
 cd dist
+# 初始化並設置 Git
 git init
 git add -A
-git commit -m 'deploy'
-git push -f https://github.com/kazechen/vue-calculate.git master:gh-pages
+git commit -m "update";
+
+# 上傳到 gh-pages
+git push -f $originUrl main:gh-pages
+
 cd -
